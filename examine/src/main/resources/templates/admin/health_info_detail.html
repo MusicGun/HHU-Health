@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/images/icon.png">
+
+    <title>河海健康系统管理版</title>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="/dashboard.css" rel="stylesheet">
+</head>
+
+<body >
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/admin">河海健康管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/admin">图表</a></li>
+                <li><a href="/labManage">设置</a></li>
+                <li><a href="/admin/checkApply">审批申请</a></li>
+                <li><a href="/logout">注销</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="/admin">概况 </a></li>
+                <li class="active"><a href="/healthAnalyse">健康分析<span class="sr-only">(current)</span></a></li>
+                <li><a href="/labManage">实验室管理</a></li>
+                <li><a href="/admin/checkApply">账号审批</a></li>
+                <li><a href="/authority">权限管理</a></li>
+                <li><a href="/admin/personal">个人中心</a></li>
+                <li><a href="/QRCode">二维码生成</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 row container-fluid col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div th:if="${online.size()>0}">
+                <h2  class="lead sub-header">已上报</h2>
+                <div class="">
+                    <table class="table table-responsive table-cell table-bordered" style="background-color: white">
+                        <thead>
+                        <tr>
+                            <th style="background-color: #ced6e0">学号</th>
+                            <th style="background-color: #ced6e0">姓名</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="h:${online}">
+                            <td th:text="${h.id}"></td>
+                            <td th:text="${h.name}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div th:if="${offline.size()>0}">
+                <h2  class="lead sub-header">未上报</h2>
+                <div class="">
+                    <table class="table table-responsive table-cell table-bordered" style="background-color: white">
+                        <thead>
+                        <tr>
+                            <th style="background-color: #ced6e0">学号</th>
+                            <th style="background-color: #ced6e0">姓名</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="h:${offline}">
+                            <td th:text="${h.id}"></td>
+                            <td th:text="${h.name}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

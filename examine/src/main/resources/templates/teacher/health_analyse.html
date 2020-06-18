@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/images/icon.png">
+    <title>河海健康系统管理版</title>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/4.7.0/echarts.min.js"></script>
+    <link href="/dashboard.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+          rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/teacher">河海健康管理系统<sup><small>&nbsp;&nbsp;教师版</small></sup></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/teacher">图表</a></li>
+                <li><a href="#">设置</a></li>
+                <li><a href="/logout">注销</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="/teacher">概况</a></li>
+                <li class="active"><a href="/teacher/healthAnalyse">健康分析</a><span class="sr-only">(current)</span></li>
+                <li><a href="#">个人中心</a></li>
+                <li><a href="/teacher/QRCode">二维码生成</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1  class="lead" style="font-size: 25px">健康分析</h1>
+            <div class="container row">
+                <select onchange="analyse(this)" class="selectpicker">
+                    <option value="今日异常">今日异常</option>
+                    <option value="今日上报">今日上报</option>
+                    <option value="重点学生">重点学生</option>
+                    <option value="上报详情">上报详情</option>
+                </select>
+            </div>
+            <br>
+            <div id="exceptiontable" class="">
+                <table class="table table-cell table-bordered  table-responsive" style="background-color: white">
+                    <thead>
+                    <tr>
+                        <th style="background-color: #ced6e0">学号</th>
+                        <th style="background-color: #ced6e0">早上体温是否异常</th>
+                        <th style="background-color: #ced6e0">晚上体温是否异常</th>
+                        <th style="background-color: #ced6e0">是否健康</th>
+                        <th style="background-color: #ced6e0">是否患者</th>
+                        <th style="background-color: #ced6e0">是否接触过患者</th>
+                        <th style="background-color: #ced6e0">是否去过疫情严重地区</th>
+                        <th style="background-color: #ced6e0">是否14天内接触过外国人</th>
+                        <th style="background-color: #ced6e0">是否接触过发热病人</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="e:${exceptionInfo}">
+                        <td th:text="${e.id}"></td>
+                        <td th:text="${e.isMT() ? '是' : '否' }"></td>
+                        <td th:text="${e.isAT()  ? '是': '否' }"></td>
+                        <td th:text="${e.isHealth()  ? '是': '否' }"></td>
+                        <td th:text="${e.isVictim()  ? '是': '否' }"></td>
+                        <td th:text="${e.isTouchVictim()  ? '是': '否' }"></td>
+                        <td th:text="${e.isStayArea()  ? '是': '否' }"></td>
+                        <td th:text="${e.isTouchForeigner()  ? '是': '否' }"></td>
+                        <td th:text="${e.isTouchFever() ? '是': '否' }"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination ">
+                        <li>
+                            <a th:if="${pre - 1 < 0}" class="disabled"
+                               aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                            <a th:if="${pre>0}" th:href="@{/teacher/healthAnalyse(index=${pre})}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li th:if="${pre - 2 >0}"><a th:text="${pre - 2}"
+                                                     th:href="@{/teacher/healthAnalyse(index=${pre - 2})}"></a></li>
+                        <li th:if="${pre - 1 >0}"><a th:text="${pre -1 }"
+                                                     th:href="@{/teacher/healthAnalyse(index=${pre - 1})}"></a></li>
+                        <li th:if="${pre>0}"><a th:text="${pre}" th:href="@{/teacher/healthAnalyse(index=${pre})}"></a></li>
+                        <li class="active"><a th:text="${current}" href="#"></a></li>
+                        <li th:if="${next<=total && next>current}"><a th:text="${next}"
+                                                                      th:href="@{/teacher/healthAnalyse(index=${next})}"></a>
+                        </li>
+                        <li th:if="${next<=total - 1 && next>current}"><a th:text="${next+1}"
+                                                                          th:href="@{/teacher/healthAnalyse(index=${next+1})}"></a>
+                        </li>
+                        <li th:if="${next<=total - 2 && next>current}"><a th:text="${next+2}"
+                                                                          th:href="@{/teacher/healthAnalyse(index=${next+2})}"></a>
+                        </li>
+                        <li>
+                            <a th:if="${next<current}" class="disabled"
+                               aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                            <a th:if="${next<=total && next>current}" th:href="@{/teacher/healthAnalyse(index=${next})}"
+                               aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="bg-info" id="todayInfo">
+                <div class="col-lg-6 bg-info col-md-12  text-center">
+                    <div id="map01" class="img-fluid img-responsive" style="height: 600px"></div>
+                </div>
+                <div class="col-lg-6 bg-info col-md-12">
+                    <div id="map02" class="img-fluid img-responsive" style="height: 600px"></div>
+                </div>
+            </div>
+            <div id="healthInfo">
+                <div th:if="${online.size()>0}">
+                    <h2  class="lead sub-header">已上报</h2>
+                    <div class="">
+                        <table class="table table-responsive table-bordered table-cell" style="background-color: white">
+                            <thead>
+                            <tr>
+                                <th style="background-color: #ced6e0">学号</th>
+                                <th style="background-color: #ced6e0">姓名</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="h:${online}">
+                                <td th:text="${h.id}"></td>
+                                <td th:text="${h.name}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div th:if="${offline.size()>0}">
+                    <h2  class="lead sub-header">未上报</h2>
+                    <div class="">
+                        <table class="table table-responsive table-bordered table-cell" style="background-color: white">
+                            <thead>
+                            <tr>
+                                <th style="background-color: #ced6e0">学号</th>
+                                <th style="background-color: #ced6e0">姓名</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="h:${offline}">
+                                <td th:text="${h.id}"></td>
+                                <td th:text="${h.name}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="importStudent">
+                <table class="table table-responsive table-cell table-bordered" style="background-color: white">
+                    <thead>
+                    <tr>
+                        <th style="background-color: #ced6e0">学号</th>
+                        <th style="background-color: #ced6e0">姓名</th>
+                        <th style="background-color: #ced6e0">联系方式</th>
+                        <th style="background-color: #ced6e0">邮箱</th>
+                        <th style="background-color: #ced6e0">宿舍</th>
+                        <th style="background-color: #ced6e0">实验室</th>
+                        <th style="background-color: #ced6e0">详细情况</th>
+                    </tr>
+                    </thead>
+                    <tbody id="content">
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+<script type="application/javascript" th:inline="javascript">
+    var healthAnalse = [[${healthAnalyse}]];
+
+    var health = new Array();
+
+    var offline = new Array();
+
+    var exception = new Array();
+
+    for (var i = 0; i < healthAnalse.length; i++) {
+        health[i] = healthAnalse[i].health;
+
+        offline[i] = healthAnalse[i].offline;
+
+        exception[i] = healthAnalse[i].exception;
+    }
+
+
+</script>
+<script>
+    $("#todayInfo").hide();
+
+    $("#importStudent").hide();
+    $("#healthInfo").hide();
+    function analyse(element) {
+        if ($(element).val() == "今日异常") {
+            $("#exceptiontable").show();
+            $("#todayInfo").hide();
+            $("#healthInfo").hide();
+            $("#importStudent").hide();
+        } else if ($(element).val() == "今日上报") {
+            $("#exceptiontable").hide();
+            $("#todayInfo").show();
+            $("#healthInfo").hide();
+            $("#importStudent").hide();
+            todayInfo();
+        } else if ($(element).val() == "上报详情") {
+            $("#exceptiontable").hide();
+            $("#todayInfo").hide();
+            $("#healthInfo").show();
+            $("#importStudent").hide();
+        } else {
+            $("#exceptiontable").hide();
+            $("#todayInfo").hide();
+            $("#healthInfo").hide();
+            $("#importStudent").show();
+            marked();
+        }
+    }
+</script>
+<script>
+    function todayInfo() {
+        var map01 = echarts.init(document.getElementById('map01'));
+        var map02 = echarts.init(document.getElementById('map02'));
+        var option01 = {
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b}: {c} ({d}%)'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 10,
+                data: ['健康', '异常', '未上报']
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: {show: true},
+                    dataView: {show: true, readOnly: false},
+                    magicType: {
+                        show: true,
+                        type: ['pie', 'funnel']
+                    },
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            series: [
+                {
+                    name: '上报情况',
+                    type: 'pie',
+                    radius: ['50%', '70%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        label: {
+                            show: true,
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                        }
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    data: [
+                        {value: health[health.length - 1], name: '健康'},
+                        {value: exception[exception.length - 1], name: '异常'},
+                        {value: offline[offline.length - 1], name: '未上报'}
+                    ]
+                }
+            ],
+            color:['#1abc9c','#c0392b','#34495e']
+        };
+        map01.setOption(option01);
+        window.addEventListener("resize", function () {
+            map01.resize();
+        });
+
+        var option02 = {
+            title: {
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b} : {c} ({d}%)'
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: {show: true},
+                    dataView: {show: true, readOnly: false},
+                    magicType: {
+                        show: true,
+                        type: ['pie', 'funnel']
+                    },
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            series: [
+                {
+                    name: '今日情况',
+                    type: 'pie',
+                    radius: [30, 170],
+                    center: ['55%', '50%'],
+                    roseType: 'area',
+                    data: [
+                        {value: health[health.length - 1], name: '健康'},
+                        {value: exception[exception.length - 1], name: '异常'},
+                        {value: offline[offline.length - 1], name: '未上报'}
+                    ]
+                }
+            ],
+            color:['#1abc9c','#c0392b','#34495e'],
+        };
+        map02.setOption(option02);
+        window.addEventListener("resize", function () {
+            map02.resize();
+        });
+    }
+</script>
+
+<script>
+    function marked() {
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            url: "/teacher/marked",
+            success: function (result) {
+
+                $("#content").empty();
+
+                for (var i = 0; i < result.length; i++) {
+                    var id = $("<td></td>").text(result[i].id);
+                    var name = $("<td></td>").text(result[i].name);
+                    var email = $("<td></td>").text(result[i].email);
+                    var dormitory = $("<td></td>").text(result[i].dormitory);
+                    var labid = $("<td></td>").text(result[i].labid);
+                    var detail = $("<td><button onclick='markdetail(this)' class='btn bg-primary'>详细情况</button></td>");
+                    var tr = $("<tr></tr>");
+                    var phone = $("<td></td>").text(result[i].phone);
+                    tr.append(id, name, phone,email, dormitory, labid, detail);
+                    $("#content").append(tr);
+                }
+
+
+            },
+            error: function (result) {
+                console.log(result);
+            }
+        });
+    }
+</script>
+<script>
+
+    function markdetail(element) {
+
+        var td = $(element).parent().siblings();
+        window.location.href = '/teacher/markDetail?id=' + $(td[0]).text();
+
+    }
+</script>
+</html>
+

@@ -1,0 +1,58 @@
+spring:
+  datasource:
+    username: username
+    password: password
+    url: jdbc:mysql://localhost:3306/test?characterEncoding=utf-8&&serverTimezone=Asia/Shanghai&&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    #连接池配置
+    hikari:
+      idle-timeout: 60000  #10分钟
+      auto-commit: true #事务自动提交
+      maximum-pool-size: 10 #最大连接数
+      minimum-idle: 2
+
+  http:
+    encoding:
+      charset: UTF-8
+      force-request: true
+  thymeleaf:
+    encoding: UTF-8
+    cache: true
+  mail:
+    host: smtp.163.com
+    username: username
+    password: password
+    default-encoding: UTF-8
+    protocol: smtp
+    #linux下换端口,本来是25号端口
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            port: 465
+  resources:
+    chain:
+      cache: true
+      strategy:
+        fixed:
+          enabled: true
+          paths: /**
+          version: v1.0.0
+  redis:
+    host: localhost
+    port: 6379
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  port: 8080
+
+
+
+
+
+
+
+
+

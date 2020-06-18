@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/images/icon.png">
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
+    <title>登录</title>
+    <link rel="stylesheet" href="/auth.css">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script>
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        function image() {
+            if (IsPC()) {
+                $("body").css({
+                    "background-image": "url('/images/success.png')",
+                    "background-size": "cover",
+                    "background-position": "center center",
+                    "background-attachment": "fixed"
+                });
+            }
+        }
+    </script>
+</head>
+
+<body onload="image()">
+<div class="lowin lowin-blue">
+    <div class="lowin-brand">
+        <img src="/test01.png" alt="logo">
+    </div>
+    <div class="lowin-wrapper">
+        <div class="lowin-box lowin-login">
+            <div class="lowin-box-inner">
+                <form method="post">
+                    <p>艰苦朴素,实事求是</p>
+
+                    <div class="lowin-group">
+                        <label>用户名 &nbsp;<small style="color: red" th:text="${msg}"></small>
+                            <a href="#" class="login-back-link">登录?</a></label>
+                        <input type="text" minlength="8" maxlength="11" autocomplete="email" name="username"
+                               class="lowin-input">
+                    </div>
+                    <input name="remember-me" type="hidden" value="true">
+                    <div class="lowin-group password-group">
+                        <label>密码 <a href="#" class="forgot-link">忘记密码?</a></label>
+                        <input type="password" minlength="1" name="password" autocomplete="current-password"
+                               class="lowin-input">
+                    </div>
+                    <button class="lowin-btn login-btn">
+                        登录
+                    </button>
+                    <div class="text-foot">
+                        <p id="count"></p>
+                        没有账号? <a href="" class="register-link">注册</a>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="lowin-box lowin-register">
+            <div class="lowin-box-inner">
+                <p>申请一个账号吧</p>
+                <div class="lowin-group">
+                    <label>学号
+                        <small id="id_info" style="color:red">*</small>
+                    </label>
+                    <input type="number" minlength="8" id="id" autocomplete="id" class="lowin-input">
+                </div>
+                <div class="lowin-group">
+                    <label>姓名
+                        <small id="name_info" style="color: red">*</small>
+                    </label>
+                    <input type="text" autocomplete="name" id="name" class="lowin-input">
+                </div>
+                <div class="lowin-group">
+                    <label>联系方式
+                        <small id="phone-info" style="color: red">*</small>
+                    </label>
+                    <input type="number" minlength="11" id="phone" class="lowin-input" required>
+                </div>
+                <div class="lowin-group">
+                    <label>邮箱
+                        <small id="email_info" style="color: red">*</small>
+                    </label>
+                    <input type="email" autocomplete="email" id="email" class="lowin-input">
+                </div>
+                <div class="lowin-group ">
+                    <label>性别
+                        <small id="sex_info" style="color: red">*</small>
+                    </label>
+                    <select id="sex" class="lowin-input">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                </div>
+                <div class="lowin-group">
+                    <label>实验室编号
+                        <small id="lanid_info" style="color: red">*</small>
+                    </label>
+                    <select id="labid" class="lowin-input">
+                        <option value="401">401</option>
+                        <option value="402">402</option>
+                        <option value="403">403</option>
+                        <option value="404">404</option>
+                        <option value="405">405</option>
+                        <option value="406">406</option>
+                        <option value="407">407</option>
+                        <option value="408">408</option>
+                        <option value="409">409</option>
+                        <option value="410">410</option>
+                    </select>
+                </div>
+                <div>
+                    <label>宿舍楼
+                        <small id="building_info" style="color: red">*</small>
+                    </label>
+                    <select id="building" class="lowin-input">
+                        <option value="4舍">4舍</option>
+                        <option value="5舍">5舍</option>
+                        <option value="6舍">6舍</option>
+                        <option value="7舍">7舍</option>
+                        <option value="8舍">8舍</option>
+                        <option value="9舍">9舍</option>
+                    </select>
+                </div>
+                <div>
+                    <label>寝室号
+                        <small id="room_info" style="color: red">*</small>
+                    </label>
+                    <input minlength="3" type="number" id="room" class="lowin-input" required>
+                </div>
+                <div class="lowin-group">
+                    <label>密码
+                        <small id="password_info" style="color: red">*</small>
+                    </label>
+                    <input minlength="8" type="password" id="password" autocomplete="password" class="lowin-input">
+                </div>
+                <div class="lowin-group">
+                    <label>确认密码
+                        <small id="password_check_info" style="color: red">*</small>
+                    </label>
+                    <input minlength="8" type="password" id="password_check" autocomplete="password"
+                           class="lowin-input">
+                </div>
+                <button class="lowin-btn" onclick="register()">
+                    注册
+                </button>
+                <div class="text-foot">
+                    已有账号? <a href="" class="login-link">登录</a>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="lowin-footer">
+        <a class="nav-link" target="_blank" href="mailto:1664532223@qq.com"></a>
+    </div>
+</div>
+
+<script src="/auth.js"></script>
+<script>
+    Auth.init({
+        login_url: '/login',
+        forgot_url: '/forgot'
+    });
+</script>
+<script>
+    $.ajax({
+        //请求方式
+        type: "POST",
+        //请求的媒体类型
+        contentType: "application/json",
+        //请求地址
+        dataType: "json",
+        url: "/getCount",
+        //数据，json字符串
+        success: function (result) {
+            $("#count").text("您是本站的第"+result+"位访问者");
+        },
+        error: function (result) {
+        }
+    });
+</script>
+
+<script>
+    function register() {
+        var id = $("#id").val();
+        if (id.length < 8) {
+            $("#id_info").text("* 请输入合法学号");
+            return;
+        } else {
+            $("#id_info").text("*");
+        }
+        var name = $("#name").val();
+        var num = /[0-9]/;
+        if (num.test(name) || name.length < 2) {
+            $("#name_info").text("* 请输入合法姓名");
+            return;
+        } else {
+            $("#name_info").text("* ");
+        }
+        var email = $("#email").val();
+        if (email.length < 10) {
+            $("#email_info").text("* 请输入邮箱");
+            return;
+        } else {
+            $("#email_info").text("* ");
+        }
+        if ($("#room").val().length < 3) {
+            $("#room_info").text("* 请输入正确的宿舍号");
+            return;
+        } else {
+            $("#room_info").text("*");
+        }
+        var password = $("#password").val();
+        var password_check = $("#password_check").val();
+        if (password.length < 8) {
+            $("#password_info").text("* 密码长度至少为8");
+            return;
+        } else {
+            $("#password_info").text("* ");
+        }
+        if (password_check.length < 1) {
+            $("#password_check_info").text("* 请确认密码");
+            return;
+        } else {
+            $("#password_check_info").text("*");
+        }
+        if (password_check != password) {
+            $("#password_info").text("* 两次密码不相等");
+            return;
+        } else {
+            $("#password_info").text("*");
+        }
+        var phone = $("#phone").val();
+        var sex = $("#sex").val();
+        var labid = $("#labid").val();
+        var dormitory = $("#building").val() + "-" + $("#room").val();
+        //请求参数
+        var list = {
+            id: id, name: name, email: email, sex: sex, labid: labid, password: password, phone: phone,
+            dormitory: dormitory
+        };
+
+        //console.log(list);
+        //
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json",
+            //请求地址
+            dataType: "json",
+            url: "/register",
+            //数据，json字符串
+            data: JSON.stringify(list),
+            //请求成功
+            success: function (result) {
+                if (result == "/register/register_success") {
+                    $.get(result);
+                } else {
+                    alert(result);
+                }
+            },
+            error: function (result) {
+                var url = (result.responseText);
+                if (url.length > 0 && url.toString() == "/register/register_success") {
+                    window.location.replace(url);
+                } else {
+                    alert(result.responseText);
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

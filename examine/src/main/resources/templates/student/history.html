@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Style -->
+    <link rel="stylesheet" href="/assets/style.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,700" rel="stylesheet">
+
+    <!-- Ionic Icons-->
+    <link href="https://unpkg.com/ionicons@4.5.5/dist/css/ionicons.min.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/images/icon.png"/>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <title>历史上报记录</title>
+</head>
+
+<body style="background-color: #f1f2f6">
+<nav class="navbar bg-info navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" style="color: white" href="#">HOHAI UNIVERSITY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="icon ion-md-menu"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;font-size: 18px" href="/index">主页</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;font-size: 18px" href="/health/form">健康上报</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;font-size: 18px" href="/history">上报历史</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;font-size: 18px" href="#">个人中心</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <a href="/logout" style="color: white;font-size: 15px" class="btn bg-success primary-btn">退出登录</a>
+            </form>
+        </div>
+    </div>
+</nav>
+<div class="container container-fluid">
+    <div class="row">
+        <div class="main">
+            <h2 class="sub-header">历史记录</h2>
+            <div class="">
+                <table class="table table-cell table-bordered table-responsive" style="background-color: white">
+                    <thead>
+                    <tr>
+                        <th style="background-color: #dfe4ea">进入时间</th>
+                        <th style="background-color: #dfe4ea">外出时间</th>
+                        <th style="background-color: #dfe4ea">早8点体温>37.3℃</th>
+                        <th style="background-color: #dfe4ea">晚6点体温>37.3℃</th>
+                        <th style="background-color: #dfe4ea">是否健康</th>
+                        <th style="background-color: #dfe4ea">是否新冠病例或疑似病例、无症状感染者</th>
+                        <th style="background-color: #dfe4ea">是否与确诊/疑似病例或无症状感染者密接?</th>
+                        <th style="background-color: #dfe4ea">是否在疫情严重地区停留或与该地区返乡未满14天人员密接?</th>
+                        <th style="background-color: #dfe4ea">是否与发热或呼吸道感染症状人员密接?</th>
+                        <th style="background-color: #dfe4ea">今日是否有海外旅居史?</th>
+                        <th style="background-color: #dfe4ea">今日是否接触过境外归国未满14天人员?</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="h:${history}">
+                        <td th:text="${h.showInTime}"></td>
+                        <td th:text="${h.showOutTime}"></td>
+                        <td th:if="${h.isMT() == true}">是</td>
+                        <td th:if="${h.isMT() == false}">否</td>
+                        <td th:if="${h.isAT() == true}">是</td>
+                        <td th:if="${h.isAT() == false}">否</td>
+                        <td th:if="${h.isHealth() == true}">是</td>
+                        <td th:if="${h.isHealth() != true}">否</td>
+                        <td th:if="${h.isVictim() == true}">是</td>
+                        <td th:if="${h.isVictim() != true}">否</td>
+                        <td th:if="${h.isTouchVictim() == true}">是</td>
+                        <td th:if="${h.isTouchVictim() != true}">否</td>
+                        <td th:if="${h.isStayArea()} == true">是</td>
+                        <td th:if="${h.isStayArea()} != true">否</td>
+                        <td th:if="${h.isTouchFever()} == true">是</td>
+                        <td th:if="${h.isTouchFever()} != true">否</td>
+                        <td th:if="${h.isBoardHistory()} == true">是</td>
+                        <td th:if="${h.isBoardHistory()} != true">否</td>
+                        <td th:if="${h.isTouchForeigner() == true}">是</td>
+                        <td th:if="${h.isTouchForeigner() != true}">否</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+               <div class="text-center">
+                   <nav aria-label="Page navigation">
+                       <ul class="pagination">
+                           <li class="page-item">
+                               <a th:if="${pre>0}" class="page-link" th:href="@{/history(index=${pre})}">上一页</a>
+                               <a th:if="${pre<=0}" class="page-link disabled" >上一页</a>
+                           </li>
+                           <li th:if="${pre>0}" class="page-item"><a th:text="${pre}" class="page-link" th:href="@{/history(index=${pre})}"></a></li>
+                           <li class="active page-item"><a th:text="${current}" class="page-link" th:href="@{/history(index=${next})}"></a></li>
+                           <li th:if="${next<=total && next>current}" class="page-item"><a th:text="${next}" class="page-link" th:href="@{/history(index=${next})}"></a></li>
+                           <li class="page-item">
+                               <a th:if="${current<next}" class="page-link" th:href="@{/history(index=${next})}">下一页</a>
+                           </li>
+                           <li class="page-item">
+                               <a th:if="${current>next}" class="page-link disabled" >下一页</a>
+                           </li>
+                       </ul>
+                   </nav>
+               </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
+

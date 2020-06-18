@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/images/icon.png">
+
+    <title>河海健康系统管理版</title>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="/dashboard.css" rel="stylesheet"></head>
+<body >
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/teacher">河海健康管理系统<sup><small>&nbsp;&nbsp;教师版</small></sup></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/teacher">图表</a></li>
+                <li><a href="#">设置</a></li>
+                <li><a href="/logout">注销</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="/teacher">概况</a></li>
+                <li ><a href="/teacher/healthAnalyse" >健康分析</a></li>
+                <li ><a href="#">个人中心</a></li>
+                <li class="active"><a href="/teacher/QRCode">二维码生成</a><span class="sr-only">(current)</span></li>
+            </ul>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+            <div class="container text-center">
+                <div class="col-lg-6 col-md-12 card text-center" >
+                    <img src="/teacher/inCode" class="card-img-top" alt="登入码" style="height: 400px;width: 400px">
+                    <div class="card-body">
+                        <h2 class="card-title">登入码</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 card text-center">
+                    <img src="/teacher/outCode" class="card-img-top" alt="登入码" style="height: 400px;width: 400px">
+                    <div class="card-body">
+                        <h2 class="card-title">登出码</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

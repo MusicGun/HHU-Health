@@ -1,0 +1,16 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+
+}
+
+.container {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+

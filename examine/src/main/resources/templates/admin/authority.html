@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/images/icon.png">
+
+    <title>河海健康系统管理版</title>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap-select/2.0.0-beta1/css/bootstrap-select.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="/dashboard.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+          rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-select/2.0.0-beta1/js/bootstrap-select.js"></script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">河海健康管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/admin">图表</a></li>
+                <li><a href="#">设置</a></li>
+                <li><a href="/admin/checkApply">审批申请</a></li>
+                <li><a href="/logout">注销</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="/admin">概况</a></li>
+                <li><a href="/healthAnalyse">健康分析</a></li>
+                <li><a href="/labManage">实验室管理</a></li>
+                <li><a href="/admin/checkApply">账号审批</a></li>
+                <li class="active"><a href="/authority">权限管理<span class="sr-only">(current)</span></a></li>
+                <li><a href="/admin/personal">个人中心</a></li>
+                <li><a href="/QRCode">二维码生成</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="lead" style="font-size: 25px">管理员列表</h1>
+            <div class="">
+                <table class="table table-cell table-bordered table-responsive " style="background-color: #ffffff">
+                    <thead>
+                    <tr>
+                        <th style="background-color: #ced6e0">工号</th>
+                        <th style="background-color: #ced6e0">姓名</th>
+                        <th style="background-color: #ced6e0">邮箱</th>
+                        <th style="background-color: #ced6e0">权限</th>
+                        <th style="background-color: #ced6e0"></th>
+                        <th style="background-color: #ced6e0">操作</th>
+                        <th style="background-color: #ced6e0">删除</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="a:${admins}">
+                        <td th:text="${a.id}"></td>
+                        <td th:text="${a.name}"></td>
+                        <td th:text="${a.email}"></td>
+                        <td th:if="${a.authority=='p1'}">增删查改</td>
+                        <td th:if="${a.authority=='p2'}">增查改</td>
+                        <td th:if="${a.authority=='p3'}">查</td>
+
+                        <form>
+                            <td><select name="p">
+                                <option value="p1">增删查改</option>
+                                <option value="p2">增查改</option>
+                                <option value="p3">查</option>
+                            </select></td>
+                            <input th:value="${a.id}" name="id" hidden>
+                            <td><input type="submit" class="btn btn-info" value="更改权限"></td>
+                        </form>
+
+                        <td>
+                            <input th:value="${a.id}" name="id" hidden>
+                            <input class="btn btn-danger" type="submit" onclick="deleteAdmin(this)" value="删除">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <form action="/authority/addAdmin" method="get">
+                    <input value="添加管理员" type="submit" class="btn btn-primary">
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function deleteAdmin(element) {
+        var input = $(element).siblings();
+
+        var id = $(input).val();
+
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            url: "/authority/deleteAdmin",
+            data: id,
+            success: function (result) {
+                var msg = alert(result);
+                if (msg != "success") {
+                    alert(msg);
+                } else {
+                    window.location.replace("/authority");
+                }
+            },
+            error: function (result) {
+                var msg = (result.responseText);
+                if (msg != "success") {
+                    alert(msg);
+                } else {
+                    window.location.replace("/authority");
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>
+

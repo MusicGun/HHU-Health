@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/images/icon.png">
+
+    <title>河海健康系统管理版</title>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/4.7.0/echarts.min.js"></script>
+    <link href="/dashboard.css" rel="stylesheet">
+    <script type="text/javascript" th:inline="javascript">
+        var list = [[${list}]];
+        var time = new Array();
+        var health = new Array();
+        var exception = new Array();
+        var offline = new Array();
+        var stayTime = new Array();
+        var stayTimelabe = new Array();
+        time[0] = '时间';
+        health[0] = '健康人数';
+        exception[0] = '异常人数';
+        offline[0] = "未上报人数";
+        for (var i = 0; i < list.length; i++) {
+            time[i + 1] = list[i].time;
+            health[i+1] = list[i].health;
+            exception[i+1] = list[i].exception;
+            offline[i+1] = list[i].offline;
+            stayTime[i] = list[i].stayTime;
+            stayTimelabe[i] = list[i].time;
+        }
+    </script>
+</head>
+
+<body >
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/admin">河海健康管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/admin">图表</a></li>
+                <li><a href="/labManage">设置</a></li>
+                <li><a href="/admin/checkApply">审批申请</a></li>
+                <li><a href="/logout">注销</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar" >
+            <ul class="nav nav-sidebar">
+                <li style="color: white;" class="active"><a  href="/admin">概况 <span class="sr-only">(current)</span></a></li>
+                <li><a href="/healthAnalyse">健康分析</a></li>
+                <li><a href="/labManage">实验室管理</a></li>
+                <li><a href="/admin/checkApply">账号审批</a></li>
+                <li><a href="/authority">权限管理</a></li>
+                <li><a href="/admin/personal">个人中心</a></li>
+                <li><a href="/QRCode">二维码生成</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 row container-fluid col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="col-lg-6 col-md-12">
+                <div class="card bg-info text-center" style="border-radius: 15px">
+                    <div class="card-header text-center">
+                        <h2 class="lead" style="padding: 10px">健康统计</h2>
+                    </div>
+                    <div class="card-body">
+                        <div id="map" class="img-responsive" style="width: 100%;height: 650px">
+                        </div>
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="card bg-success text-center" style="border-radius: 15px">
+                    <div class="card-header">
+
+                        <h3 class="lead" style="padding: 5px">今日打卡情况</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="piemap" class="img-responsive" style="width: 100%;height: 250px">
+
+                        </div>
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+
+                <div class="card bg-info">
+                    <div class="card-header text-center" style="border-radius: 15px">
+
+                        <h3 class="lead" style="padding: 10px">实验室停留时间统计</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="barmap" class="img-responsive" style="width: 100%;height: 300px">
+
+                        </div>
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    var map = echarts.init(document.getElementById('map'));
+    var option;
+    setTimeout(function () {
+        option = {
+            legend: {},
+            tooltip: {
+                trigger: 'axis',
+                showContent: false
+            },
+            dataset: {
+                source: [
+                    time,
+                    health,
+                    exception,
+                    offline
+                ]
+            },
+            xAxis: {type: 'category'},
+            yAxis: {gridIndex: 0},
+            grid: {top: '55%'},
+            series: [
+                {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+                {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+                {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+                {
+                    type: 'pie',
+                    id: 'pie',
+                    radius: '30%',
+                    center: ['50%', '25%'],
+                    label: {
+                        formatter: '{@04-01} ({d}%)'
+                    },
+                    encode: {
+                        itemName: '时间',
+                        value: '04-01',
+                        tooltip: '04-01'
+                    }
+                }
+            ],
+            color:['#1abc9c','#c0392b','#34495e']
+        };
+        map.on('updateAxisPointer', function (event) {
+            var xAxisInfo = event.axesInfo[0];
+            if (xAxisInfo) {
+                var dimension = xAxisInfo.value + 1;
+                map.setOption({
+                    series: {
+                        id: 'pie',
+                        label: {
+                            formatter: '{@[' + dimension + ']} ({d}%)'
+                        },
+                        encode: {
+                            value: dimension,
+                            tooltip: dimension
+                        }
+                    }
+                });
+            }
+        });
+        map.setOption(option);
+        window.addEventListener("resize", function () {
+            map.resize();
+        });
+    });
+    map.setOption(option);
+    window.addEventListener("resize", function () {
+        map.resize();
+    });
+</script>
+
+<script>
+    var pieMap = echarts.init(document.getElementById('piemap'));
+    var pieoption = {
+        tooltip: {
+            trigger: 'item',
+            formatter: '{b}: {c} ({d}%)'
+        },
+        legend: {
+            bottom: 10,
+            data: ['健康人数', '未打卡人数', '异常人数']
+        },
+        series: [
+            {
+                type: 'pie',
+                //厚度
+                radius: ['50%', '70%'],
+                // 二上
+                center: ['50%', '38%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '20',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    {value: list[list.length-1].health, name: '健康人数'},
+                    {value: list[list.length-1].offline, name: '未打卡人数'},
+                    {value: list[list.length-1].exception, name: '异常人数'},
+                ],
+                color:['#1abc9c','#34495e','#c0392b'],
+            }
+        ]
+    };
+
+    pieMap.setOption(pieoption);
+    window.addEventListener("resize", function () {
+        pieMap.resize();
+    });
+</script>
+<script>
+    var barMap = echarts.init(document.getElementById('barmap'));
+    var baroption = {
+        color: ['#3398DB'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: stayTimelabe,
+                axisTick: {
+                    alignWithLabel: true
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+                name: '停留时间',
+                type: 'bar',
+                barWidth: '60%',
+                data: stayTime
+            }
+        ]
+    };
+    barMap.setOption(baroption);
+    window.addEventListener("resize", function () {
+        barMap.resize();
+    });
+</script>
+</body>
+</html>

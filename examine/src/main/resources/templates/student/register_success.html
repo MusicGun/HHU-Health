@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/images/icon.png">
+    <title>申请成功</title>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Lightbox-->
+    <link rel="stylesheet" href="/vendor/lightbox2/css/lightbox.min.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/css/custom.css">
+</head>
+<body>
+<body style="background-color:  #029686">
+<div class="text-center">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2 class="lead" style="color: white">申请成功</h2>
+    <h2 class="lead" style="color: white">管理员正在审核中...</h2>
+    <h2 class="lead" style="color: white;">审核通过后,我们会在第一时间通过邮箱通知您</h2>
+    <p class="lead" style="color: white">
+        <small id="time" style="color: white;"></small>
+        s后跳转回主页
+    </p>
+</div>
+</body>
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendor/lightbox2/js/lightbox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"></script>
+<script src="/js/front.js"></script>
+<script type="text/javascript">
+    var i = 10;
+    $(function () {
+        setTimeout(function () {
+            window.location.href = '/login-view';
+        }, 10000);//5秒后返回首页
+        after();
+    });
+
+    //自动刷新页面上的时间
+    function after() {
+        $("#time").empty().append(i);
+        i = i - 1;
+        setTimeout(function () {
+            after();
+        }, 1000);
+    }
+</script>
+</body>
+</html>

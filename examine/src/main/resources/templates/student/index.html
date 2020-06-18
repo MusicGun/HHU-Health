@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Style -->
+    <link rel="stylesheet" href="/assets/style.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,700" rel="stylesheet">
+
+    <!-- Ionic Icons-->
+    <link href="https://unpkg.com/ionicons@4.5.5/dist/css/ionicons.min.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/images/icon.png"/>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>河海健康上报系统</title>
+</head>
+
+<body>
+<nav class="navbar bg-info navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" style="color: white" href="#">HOHAI UNIVERSITY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="icon ion-md-menu"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;font-size: 18px" href="/index">主页</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;font-size: 18px" href="/health/form">健康上报</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;font-size: 18px" href="/history">上报历史</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;font-size: 18px" href="#">个人中心</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <a href="/logout" style="color: white;font-size: 15px" class="btn bg-success primary-btn">退出登录</a>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<section id="hero" class="bg-light">
+    <div class="container">
+        <div class="row  d-flex">
+            <div class="col-lg-6 col-md-12 justify-content-center align-self-center">
+                <h1>永远年轻,永远热泪盈眶</h1>
+                <p class="topmargin-sm">Life is a mystery to solve not a problem to resolve.</p>
+                <div class="topmargin-sm">
+                    <a href="/health/form" style="color: white;font-size: 18px"
+                       class="btn bg-primary primary-btn">健康上报</a>
+                    <a th:href="@{/health/out(labid=${labid})}" style="color: black;font-size: 18px" class="btn secondary-btn">外出登记</a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <img src="/images/hohai.jpg" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<footer id="footer">
+    <div class="container text-center">
+        <h3>艰苦朴素,实事求是,严格要求,勇于探索</h3>
+        <div class="row text-center topmargin-lg">
+            <div class="col-md-3 divider-right">
+                <div class="footer-btn">
+                    <a href="#">
+                        <h6>健康上报 <i class="icon ion-md-arrow-forward"></i></h6>
+                    </a>
+                    <p>我为人人,人人为我.</p>
+                </div>
+            </div>
+            <div class="col-md-3 divider-right">
+                <div class="footer-btn">
+                    <a href="#">
+                        <h6>上报历史 <i class="icon ion-md-arrow-forward"></i></h6>
+                    </a>
+                    <p>关注自己最近健康.</p>
+                </div>
+            </div>
+            <div class="col-md-3 divider-right">
+                <div class="footer-btn">
+                    <a href="#">
+                        <h6>个人中心 <i class="icon ion-md-arrow-forward"></i></h6>
+                    </a>
+                    <p>查看个人资料.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="footer-btn">
+                    <a href="#">
+                        <h6>学习信息 <i class="icon ion-md-arrow-forward"></i></h6>
+                    </a>
+                    <p>好好学习,天天向上.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div id="copyright" class="bg-light">
+    <div class="container col-lg-12 col-md-12 text-center">
+        <div class="text-center">
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">主页</a></li>
+                <li class="list-inline-item"><a href="#">联系我们</a></li>
+                <li class="list-inline-item"><a href="#">版权所有:HHUERS</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+
+</html>
