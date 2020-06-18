@@ -48,7 +48,7 @@
 
 
 
-<img src="./1.jpg" style="zoom:25%;" />
+<img src="./images/1.jpg" style="zoom:25%;" />
 
 
 
@@ -94,7 +94,7 @@
    + password：密码，加密后的密文
    + enable：账号的激活状态
 
-<img src="./user.jpg" style="zoom:50%;" />
+<img src="./images/user.jpg" style="zoom:50%;" />
 
 
 
@@ -108,14 +108,14 @@
    + dormitory：宿舍号，该学生所属宿舍
 + mark：是否是重点关注学生，用来标注该学生是否健康异常
   
-   <img src="./student.jpg" style="zoom:50%;" />
+   <img src="./images/student.jpg" style="zoom:50%;" />
 
 3. 管理员信息实体
    + id ：工号
    + email：联系邮箱
    + name：姓名
 
-<img src="./admin.jpg" style="zoom:50%;" />
+<img src="./images/admin.jpg" style="zoom:50%;" />
 
 4. 实验室实体:admin.jpg
    + labid：实验室的唯一标识，实验室id
@@ -123,7 +123,7 @@
    + total：实验室总容量，实验室能够容纳学生的总数
    + id：实验室负责人id，该实验室的管理员
 
-<img src="./lab.jpg" style="zoom:50%;" />
+<img src="./images/lab.jpg" style="zoom:50%;" />
 
 
 
@@ -153,13 +153,13 @@
 
    + stayTime：实验室停留时间
 
-<img src="./health_info.jpg" style="zoom:50%;" />
+<img src="./images/health_info.jpg" style="zoom:50%;" />
 
 ### 全局概念模式
 
 分析各个实体间的关系，我们得到以下全局E-R图：
 
-<img src="./全局ER.jpg" style="zoom:40%;" />
+<img src="./images/全局ER.jpg" style="zoom:40%;" />
 
 其中user为账户实体，一个账户对应着一个学生信息实体(student)或管理员信息实体(admin)。
 
@@ -263,33 +263,33 @@ lab（<font color="red">实验室编号</font>，人数，<font color="blue">负
 
 1. user
 
-   <img src="./user_table.png" style="zoom: 67%;" />
+   <img src="./images/user_table.png" style="zoom: 67%;" />
 
 2. user_role
 
-   <img src="./user_role_table.png" style="zoom:67%;" />
+   <img src="./images/user_role_table.png" style="zoom:67%;" />
 
 3. student
 
-   <img src="./student_table.png" style="zoom: 67%;" />
+   <img src="./images/student_table.png" style="zoom: 67%;" />
 
 3. admin
 
-   <img src="./admin_table.png" style="zoom: 72%;" />
+   <img src="./images/admin_table.png" style="zoom: 72%;" />
 
 4. lab
 
-   <img src="./lab_table.png" style="zoom: 72%;" />
+   <img src="./images/lab_table.png" style="zoom: 72%;" />
 
 5. health_info
 
-   <img src="./health_info_table.png" style="zoom: 67%;" />
+   <img src="./images/health_info_table.png" style="zoom: 67%;" />
 
 ### 关系图
 
 
 
-<img src="./relation.png" style="zoom: 80%;" />
+<img src="./images/relation.png" style="zoom: 80%;" />
 
 ### 建表语句
 
@@ -396,7 +396,7 @@ lab（<font color="red">实验室编号</font>，人数，<font color="blue">负
 
 
 
-![](./功能结构图.jpg)
+![](./images/功能结构图.jpg)
 
 ### 学生模块
 
@@ -483,7 +483,7 @@ lab（<font color="red">实验室编号</font>，人数，<font color="blue">负
 
 + 系统架构图
 
-  ![](./系统架构图.jpg)
+  ![](./images/系统架构图.jpg)
 
 ## 代码设计和界面设计
 
@@ -503,17 +503,17 @@ lab（<font color="red">实验室编号</font>，人数，<font color="blue">负
 
    注册顺序图如下：
 
-<img src="./注册顺序图.jpg" style="zoom:40%;" />
+<img src="./images/注册顺序图.jpg" style="zoom:40%;" />
 
 2. 注册界面设计
 
    1. 注册界面
 
-   <img src="./注册界面.png" style="zoom:37%;" />
+   <img src="./images/注册界面.png" style="zoom:37%;" />
 
    2. 注册结果
 
-      <img src="./申请成功.png" style="zoom: 33%;" />
+      <img src="./images/申请成功.png" style="zoom: 33%;" />
 
 
 
@@ -547,17 +547,17 @@ lab（<font color="red">实验室编号</font>，人数，<font color="blue">负
 
 1. 顺序图
 
-   <img src="./登录顺序图.jpg" style="zoom:45%;" />
+   <img src="./images/登录顺序图.jpg" style="zoom:45%;" />
 
 2. 页面设计
 
    1. 登录页面
 
-      ![](./登录界面.png)
+      ![](./images/登录界面.png)
 
    2. 登录结果
 
-      ![](./登录成功.png)
+      ![](./images/登录成功.png)
 
 3. 关键代码
 
@@ -593,13 +593,13 @@ lab（<font color="red">实验室编号</font>，人数，<font color="blue">负
 
    1. 顺序图
 
-      ![](./健康上报.jpg)
+      ![](./images/健康上报.jpg)
 
    2. 界面设计
 
       1. 信息填报界面
 
-         ![](./健康上报.png)
+         ![](./images/健康上报.png)
 
    3. 关键代码
 
@@ -659,7 +659,7 @@ lab（<font color="red">实验室编号</font>，人数，<font color="blue">负
 
 1. 界面设计
 
-   ![](./上报历史.png)
+   ![](./images/上报历史.png)
 
 2. 核心代码
 
@@ -707,7 +707,7 @@ lab（<font color="red">实验室编号</font>，人数，<font color="blue">负
    
    2. 界面设计
    
-   <img src="./教师首页.png" style="zoom: 35%;" />
+   <img src="./images/教师首页.png" style="zoom: 35%;" />
    
     3. 核心代码
    
@@ -828,7 +828,7 @@ lab（<font color="red">实验室编号</font>，人数，<font color="blue">负
 
       1. 界面设计
 
-         ![](教师二维码.png)
+         ![](./images/教师二维码.png)
 
       2. 核心代码
 
@@ -872,7 +872,7 @@ lab（<font color="red">实验室编号</font>，人数，<font color="blue">负
 
 + 界面设计
 
-  <img src="./管理员首页.png" style="zoom:60%;" />
+  <img src="./images/管理员首页.png" style="zoom:60%;" />
 
 + 核心代码
 
@@ -899,7 +899,7 @@ lab（<font color="red">实验室编号</font>，人数，<font color="blue">负
 
    1. 界面设计
 
-      <img src="管理员1.png" style="zoom:30%;" />
+      <img src="./images/管理员1.png" style="zoom:30%;" />
 
    2. 核心代码
 
@@ -961,7 +961,7 @@ lab（<font color="red">实验室编号</font>，人数，<font color="blue">负
 
    + 页面设计
 
-     <img src="./管理员3.png" style="zoom:50%;" />
+     <img src="./images/管理员3.png" style="zoom:50%;" />
 
    + 核心代码
 
@@ -985,7 +985,7 @@ lab（<font color="red">实验室编号</font>，人数，<font color="blue">负
 
 + 页面设计
 
-  <img src="管理员4.png" style="zoom:50%;" />
+  <img src="./images/管理员4.png" style="zoom:50%;" />
 
 + 核心代码
 
@@ -1030,7 +1030,7 @@ lab（<font color="red">实验室编号</font>，人数，<font color="blue">负
 
 + 页面设计
 
-  <img src="./管理员5.png" style="zoom:50%;" />
+  <img src="./images/管理员5.png" style="zoom:50%;" />
 
 + 核心代码
 
@@ -1083,7 +1083,7 @@ lab（<font color="red">实验室编号</font>，人数，<font color="blue">负
 
 + 页面设计
 
-  <img src="./管理员6.png" style="zoom:40%;" />
+  <img src="./images/管理员6.png" style="zoom:40%;" />
 
 
 
@@ -1162,271 +1162,3 @@ lab（<font color="red">实验室编号</font>，人数，<font color="blue">负
                 .and().rememberMe().rememberMeCookieName("cookie").tokenValiditySeconds(60 * 60);
     }
 ```
-
-## 功能测试
-
-### 学生模块测试
-
-1. 登录主页面
-
-![image-20200513134154863](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513134154863.png)
-
-2. 注册
-
-   ![image-20200513134248830](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513134248830.png)
-
-   3.注册结果
-
-   ![image-20200513134316899](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513134316899.png)
-
-   4. 登录主页
-
-      ![image-20200513134348872](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513134348872.png)
-
-   5.未上报就登出则发出提醒
-
-   
-
-   ​		![image-20200513134428705](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513134428705.png)
-
-   6. 健康上报
-
-   ![image-20200513134513975](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513134513975.png)
-
-   7. 健康结果![image-20200513134548191](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513134548191.png)
-
-   8. 异常结果![image-20200513134630926](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513134630926.png)
-   9. 外出登记![image-20200513134705869](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513134705869.png)
-
-   10.历史记录
-
-   ![image-20200513134737720](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513134737720.png)
-
-### 教师模块测试
-
-1. 登录主页
-
-   ![image-20200513134902673](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513134902673.png)
-
-   2.健康分析
-
-   + 今日异常
-
-     ![image-20200513134936706](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513134936706.png)
-
-   + 今日上报
-
-     ![image-20200513135004430](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513135004430.png)
-
-   + 重点学生
-
-     ![image-20200513135036620](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513135036620.png)
-
-   + 上报详情
-
-     ![image-20200513135055254](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513135055254.png)
-
-   + 登入登出码
-
-     ![image-20200513135134964](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513135134964.png)
-
-   ### 管理员模块测试
-
-   1. 健康分析
-
-      + 今日上报
-
-      ![image-20200513135442116](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513135442116.png)
-
-      + 重点学生
-
-        ![image-20200513135556087](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513135556087.png)
-
-      + 各实验室上报情况
-
-        ![image-20200513135631331](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513135631331.png)
-
-2. 实验室管理
-
-   ![image-20200513135734295](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513135734295.png)
-
-3. 权限管理
-
-   ![image-20200513135750228](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513135750228.png)
-
-4. 审批申请
-
-   ![image-20200513135816835](C:\Users\勇敢的人\AppData\Roaming\Typora\typora-user-images\image-20200513135816835.png)
-
-## 并发测试
-
-#### 测试环境
-
-+ 服务器端(本地)
-
-  + 处理器：Intel(R) Core(TM)i5-7200U CPU @2.5GHz 2.71GHz
-
-  + 内存：12GB
-
-+ JVM参数
-
-  + 最小堆内存 	-Xms2048m
-  + 最大堆内存     -Xmx2048m
-  + 垃圾回收器      -XX:+UseConcMarkSweepGC
-
-+ 数据库最大连接数
-
-  + 10
-
-+ 测试工具
-
-  + Jmeter
-
-+ 指标说明
-  + smaples：并发数
-  + min：服务器最短响应时间	单位/ms
-  + max：服务器最大响应时间，单位/ms
-  + error：请求错误比
-  + throughput：服务器每秒钟处理的请求数
-  + 90%line：指90%的请求比所得数值还要小 单位/ms
-
-#### 模拟测试数据
-
-+ 学生用户账号
-
-  ```java
-   String[] name = new String[]{"新裤子", "旧裤子", "后海大鲨鱼", "窦唯", "痛仰",
-                  "高虎", "彭蕾", "彭磊", "赵梦", "草东"};
-          List<Student> students = new ArrayList<>();
-  
-          Long id = 1820020123L;
-          for (int i = 0; i < 60; i++) {
-              Student tmp = new Student();
-              tmp.setId(id + i + "");
-              int index = (int) (Math.random() * name.length);
-              tmp.setName(name[index]);
-              tmp.setPassword("123456789");
-              tmp.setEmail("182X" + i + "@qq.com");
-              int c = (int) (Math.random() * 6);
-              tmp.setLabid(406);
-              String sex = Math.random() > 0.5 ? "男" : "女";
-              tmp.setSex(sex);
-              int n = (int) (Math.random() * 400) + 100;
-              if (sex.equals("女")) {
-                  tmp.setDormitory("10舍-" + n);
-              } else {
-                  tmp.setDormitory("11舍-" + n);
-              }
-              studentService.addStudent(tmp);
-          }
-  ```
-
-+ 健康信息
-
-  ```java
-  long id = 1730020123;
-          for (int j = 0; j < 60; j++) {
-              if (Math.random() > 0.8) {
-                  continue;
-              }
-              for (int i = 0; i < 25; i++) {
-                  HealthInfo healthInfo = new HealthInfo();
-                  healthInfo.setId(id + j + "");
-                  healthInfo.setMT(Math.random() > 0.5 ? true : false);
-                  healthInfo.setAT(Math.random() > 0.5 ? true : false);
-                  healthInfo.setVictim(Math.random() > 0.5 ? true : false);
-                  if(healthInfo.isMT() || healthInfo.isAT() || healthInfo.isHealth())
-                  {
-                      healthInfo.setHealth(false);
-                  }
-                  else
-                  {
-                      healthInfo.setHealth(Math.random() > 0.5 ? true : false);
-                  }
-                  healthInfo.setTouchForeigner(Math.random() > 0.5 ? true : false);
-                  healthInfo.setTouchFever(Math.random() > 0.5 ? true : false);
-                  healthInfo.setStayArea(Math.random() > 0.5 ? true : false);
-                  healthInfo.setBoardHistory(Math.random() > 0.5 ? true : false);
-                  healthInfo.setTouchVictim(Math.random() > 0.5 ? true : false);
-                  int inH;
-                  int inM;
-                  int outH;
-                  int outM;
-                  inH = (int) (Math.random() * 4) + 9; //9-13
-                  outH = (int) (Math.random() * 2) + 14; //14-16
-                  inM = (int) (Math.random() * 30);
-                  outM = (int) (Math.random() * 30) + 30;
-                  healthInfo.setInTime(LocalDateTime.of(2020, 04, i + 1, inH, inM, 12, 00));
-                  healthInfo.setOutTime(LocalDateTime.of(2020, 04, i + 1, outH, outM, 12, 00));
-                  healthInfo.setStayTime((int) ((outH - inH) * 60 + (outM - inM)));
-                  //登入
-                  healthInfoMapper.checkInHealthInfo(healthInfo);
-                  //登出
-                  healthInfoMapper.checkOutHealthInfo(healthInfo);
-              }
-        
-  ```
-
-  
-
-#### 学生端
-
-/login 学生端登录首页
-
-<img src="./学生端登录.png" style="zoom:30%;" />
-
-<img src="./学生端首页.png" style="zoom:30%;" />
-
-| samples | averge | median | min  | max   | error | throughput |
-| ------- | ------ | ------ | ---- | ----- | ----- | ---------- |
-| 100     | 2417   | 2367   | 310  | 3373  | 0.00% | 28.1/sec   |
-| 200     | 4361   | 4240   | 1122 | 6232  | 0.00% | 29.4/sec   |
-| 300     | 6566   | 7596   | 502  | 8413  | 0.00% | 30.1/sec   |
-| 400     | 9110   | 9684   | 290  | 11756 | 0.00% | 29.3/sec   |
-| 500     | 11445  | 12038  | 1196 | 14876 | 0.00% | 27.6/sec   |
-
-.
-
-#### 教师端登录
-
-
-
-<img src="./学生端登录.png" style="zoom: 30%;" />
-
-<img src="./教师端登录.png" style="zoom:30%;" />
-
-/login
-
-| samples | averge | median | min  | max   | error | throughput |
-| ------- | ------ | ------ | ---- | ----- | ----- | ---------- |
-| 100     | 2017   | 2278   | 288  | 3115  | 0.00% | 28.6/sec   |
-| 200     | 4226   | 4653   | 195  | 6477  | 0.00% | 27.5/sec   |
-| 300     | 6154   | 6814   | 794  | 8770  | 0.00% | 28.1/sec   |
-| 400     | 9395   | 9582   | 385  | 12081 | 0.00% | 28.0/sec   |
-| 500     | 10856  | 1169   | 294  | 14454 | 0.00% | 28.5/sec   |
-
-
-
-#### 管理端登录测试
-
-<img src="./学生端登录.png" style="zoom:30%;" />
-
-<img src="./管理端.png" style="zoom:30%;" />
-
-| samples | averge | median | min  | max  | error | throughput |
-| ------- | ------ | ------ | ---- | ---- | ----- | ---------- |
-| 100     | 738    | 762    | 479  | 956  | 0.00% | 5.5/sec    |
-| 20      | 1999   | 2145   | 543  | 3024 | 0.00% | 5.6/sec    |
-| 30      | 2287   | 2379   | 556  | 3742 | 0.00% | 6.4/sec    |
-| 40      | 3414   | 3306   | 820  | 6182 | 0.00% | 6.2/sec    |
-| 50      | 4134   | 4077   | 659  | 6896 | 0.00% | 6.4/sec    |
-
-#### 优化后
-
-| samples | averge | median | min  | max   | error | throughput |
-| ------- | ------ | ------ | ---- | ----- | ----- | ---------- |
-| 100     | 2999   | 3130   | 140  | 4965  | 0.00% | 1.7/sec    |
-| 200     | 5791   | 6937   | 1492 | 8190  | 0.00% | 19.0/sec   |
-| 300     | 8987   | 9540   | 572  | 12999 | 0.00% | 25.5/sec   |
-| 400     | 12472  | 144331 | 1238 | 17307 | 0.00% | 20.5/sec   |
-| 500     | 14624  | 16871  | 2495 | 19063 | 0.00% | 22.1/sec   |
